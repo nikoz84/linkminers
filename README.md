@@ -103,3 +103,5 @@ Run all migrations:
 ```sh
 docker-compose run --rm artisan migrate
 ```
+# linkminers
+Prueba

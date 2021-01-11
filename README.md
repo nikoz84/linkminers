@@ -147,6 +147,6 @@ docker-compose run --rm artisan db:seed
 
 Si da algun error de session limpia el cache de la aplicación
 
-```s 
-   docker-compose run --rm artisan optimize
+```sh 
+docker-compose run --rm artisan optimize
 ```

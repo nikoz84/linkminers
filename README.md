@@ -4,16 +4,19 @@ Repositório de código de prueba de Laravel, Nginx, Mysql, Vuejs, Bootstrap 5, 
 
 En la ruta de inicio es el listado en una tabla de departamentos del Perú, donde pueden ser creados y editados con sus respectivas rutas para la API. En el controlador `DepartmentController` se usa para los métodos listados abajo: 
 
-GET /department -> lista de departamentos paginados
-GET /department/{id} -> muestra un departamento específico
-PUT /department/{id} -> actualiza un departamento
-POST /department -> crea un nuevo departamento
+```
+   GET /department -> lista de departamentos paginados
+   GET /department/{id} -> muestra un departamento específico
+   PUT /department/{id} -> actualiza un departamento
+   POST /department -> crea un nuevo departamento
+```
 
 En el controlador `WebController` se hayan las rutas web.
 
-GET / -> INICIO
-GET /department/{id}
-
+```
+   GET / -> INICIO
+   GET /department/{id}
+```
 
 ## Instalación de dependencias y servidor embutido localhost 
 
@@ -41,9 +44,9 @@ Mi dominio de Docker no es del todo experto pero encontré este repositório que
 
 `https://github.com/supermavster/docker-laravel-8.git` 
 
-## Ports
+## Puertas
 
-Ports used in the project:
+Puertas usadas en el proyecto:
 | Software | Port |
 |-------------- | -------------- |
 | **nginx** | 8080 |
@@ -53,25 +56,15 @@ Ports used in the project:
 | **xdebug** | 9001 |
 | **redis** | 6379 |
 
-## Use
+# Levantar la aplicación en Docker
 
-To get started, make sure you have [Docker installed](https://docs.docker.com/) on your system and [Docker Compose](https://docs.docker.com/compose/install/), and then clone this repository.
-
-1. Clone this project:
-
-   ```sh
-   git clone https://github.com/supermavster/docker-laravel-8.git
-   ```
-
-2. Inside the folder `docker-laravel-8` and Generate your own `.env` to docker compose with the next command:
+La aplicación laravel esta dentro del directorio `source`. Renombra el archivo `example.env` para `.env` y configura la base de datos:
 
    ```sh
    cp .env.example .env
    ```
 
-3. You need **Create** or **Put** your laravel project in the folder source; to create follow the next instructions [Here](source/README.md).
-
-4. Build the project whit the next commands:
+Compila la imagen docker con el siguiente comando:
 
    ```sh
    docker-compose up --build
@@ -79,9 +72,9 @@ To get started, make sure you have [Docker installed](https://docs.docker.com/) 
 
 ---
 
-## Remember
+## Recuerda
 
-The configuration of the database **must be the same on both sides** .
+La configuraión del banco de datos **debe ser la misma en los dos lados** .
 
 ```dotenv
 # .env
@@ -104,7 +97,7 @@ DB_USERNAME=db_user
 DB_PASSWORD=db_password
 ```
 
-The only change is the `DB_HOST` in the `source/.env` where is called to the container of `mysql`:
+El unico cambio es en  `DB_HOST` en el archivo `source/.env` cuando es llamado el conteiner `mysql` que seria el host, ahi tendrias como accesar al `phpmyadmin` y conectar a la base de datos para laravel:
 
 ```dotenv
 # source/.env
@@ -113,29 +106,47 @@ DB_HOST=mysql
 
 ---
 
-## Special Cases
+## Casos especiales
 
-To Down and remove the volumes we use the next command:
+Para iniciar o levantar los containers ejecuta:
+
+```sh
+docker-compose up -d
+```
+
+Para parar y remover los volumenes usaremos el comando:
 
 ```sh
 docker-compose down -v
 ```
 
-Update Composer:
+Para actualizar las dependencias via `composer` de `PHP`:
 
 ```sh
 docker-compose run --rm composer update
+docker-compose run --rm composer install
 ```
 
-Run compiler (Webpack.mix.js) or Show the view compiler in node:
+Para ejecutar el compilador de nodejs (Webpack.mix.js):
 
 ```sh
 docker-compose run --rm npm run dev
 ```
 
-Run all migrations:
+Para ejecutar las migraciones:
 
 ```sh
 docker-compose run --rm artisan migrate
 ```
 
+Para ejecutar la carga inicial de la base de datos:
+
+```sh
+docker-compose run --rm artisan db:seed
+```
+
+Si da algun error de session limpia el cache de la aplicación
+
+```s 
+   docker-compose run --rm artisan optimize
+```

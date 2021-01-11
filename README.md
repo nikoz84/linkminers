@@ -1,10 +1,45 @@
-# Docker - Laravel
+# linkminers
 
-![Docker](https://github.com/supermavster/docker-laravel-8/workflows/Docker/badge.svg)
+Repositório de código de prueba de Laravel, Nginx, Mysql, Vuejs, Bootstrap 5, conteinerizado con Docker. En guithub encontré un repositório para desenvolver esta aplicación pequeña que tiene dos componetes: web, api.
 
-![Image](https://repository-images.githubusercontent.com/309769351/1c0dfc80-1def-11eb-9e5c-641da3e3c9b4)
+En la ruta de inicio es el listado en una tabla de departamentos del Perú, donde pueden ser creados y editados con sus respectivas rutas para la API. En el controlador `DepartmentController` se usa para los métodos listados abajo: 
 
-A pretty simplified Docker Compose workflow that sets up a LEMP (Linux, NGINX, MySQL, PHP) network of containers for local Laravel development.
+GET /department -> lista de departamentos paginados
+GET /department/{id} -> muestra un departamento específico
+PUT /department/{id} -> actualiza un departamento
+POST /department -> crea un nuevo departamento
+
+En el controlador `WebController` se hayan las rutas web.
+
+GET / -> INICIO
+GET /department/{id}
+
+
+## Instalación de dependencias y servidor embutido localhost 
+
+Si tienes instalado composer y PHP en tu maquina puedes instalar las dependencias de PHP con los comandos
+
+- composer install
+- php artisan migrate
+- php artisan db:seed
+
+En el caso de querer instalar con el comando `php artisan serve` renombrar el archivo `.env.example` para `.env` y configurar la base de datos 
+
+```conf
+   DB_CONNECTION=mysql
+   DB_HOST=mysql
+   DB_PORT=3306
+   DB_DATABASE=linkminers
+   DB_USERNAME=test
+   DB_PASSWORD=secret
+```
+
+
+## Docker e instalación de ambiente de programación paquete PHP, MYSQL, NGINX
+
+Mi dominio de Docker no es del todo experto pero encontré este repositório que me ayudó a configurar el ambiente de programación. La documentación esta en ingles y permite crear un ambiente de programación con Docker el repositorio esta en github.
+
+`https://github.com/supermavster/docker-laravel-8.git` 
 
 ## Ports
 
@@ -103,5 +138,4 @@ Run all migrations:
 ```sh
 docker-compose run --rm artisan migrate
 ```
-# linkminers
-Prueba
+

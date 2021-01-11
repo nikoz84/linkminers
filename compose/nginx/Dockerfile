@@ -11,4 +11,6 @@ RUN mkdir -p /var/www/html
 RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
 
 # Set Group to Workspace
-RUN chown laravel:laravel /var/www/html
+RUN chown laravel:laravel -R /var/www/html
+
+#RUN chmod -R 777 /usr/share/nginx/storage/*
